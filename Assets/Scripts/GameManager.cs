@@ -6,6 +6,10 @@ using UnityEngine.Events;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private UnityEvent onGameStart, onGameEnd;
+    void Start()
+    {
+        StartGame();
+    }
     public void StartGame()
     {
         onGameStart?.Invoke();
