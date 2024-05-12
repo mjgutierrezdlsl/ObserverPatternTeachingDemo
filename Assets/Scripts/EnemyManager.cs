@@ -1,16 +1,22 @@
-using System;
 using UnityEngine;
-using UnityEngine.Events;
-using Random = UnityEngine.Random;
 
 public class EnemyManager : MonoBehaviour
 {
-    [SerializeField] EnemyData[] _enemyTypes;
-    [SerializeField] Enemy _enemy;
+    [SerializeField] private EnemyData[] _enemyTypes;
+    [SerializeField] private Enemy _enemy;
+
+    private int _enemyIndex;
 
     public void SpawnEnemy()
     {
-        var type = _enemyTypes[Random.Range(0, _enemyTypes.Length)];
+        // Loops the enemy index
+        if (_enemyIndex > _enemyTypes.Length - 1)
+        {
+            _enemyIndex = 0;
+        }
+
+        var type = _enemyTypes[_enemyIndex];
         _enemy.Init(type);
+        _enemyIndex++;
     }
 }
