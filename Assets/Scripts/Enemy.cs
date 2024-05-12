@@ -12,18 +12,8 @@ public class Enemy : MonoBehaviour
     private float _currentHealth;
     private float _coinAmount;
 
-
     public UnityEvent onInit;
-    public UnityEvent<float> onDespawn;
     [SerializeField] private UnityEvent<float, float> DamageTaken;
-
-    public void Despawn(bool sendEvent = true)
-    {
-        transform.DOScale(0f, 0.5f).From(1f).SetEase(Ease.OutBounce);
-        gameObject.SetActive(false);
-        if (!sendEvent) { return; }
-        onDespawn?.Invoke(_coinAmount);
-    }
 
     public void Init(EnemyData data)
     {
@@ -42,7 +32,6 @@ public class Enemy : MonoBehaviour
         if (_currentHealth <= 0)
         {
             _currentHealth = 0;
-            onDespawn?.Invoke(_coinAmount);
         }
         DamageTaken?.Invoke(_currentHealth, _maxHealth);
         _renderer.DOColor(Color.white, 0.5f).From(Color.red);
