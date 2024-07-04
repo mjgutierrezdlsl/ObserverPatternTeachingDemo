@@ -14,6 +14,7 @@ public class Enemy : MonoBehaviour
 
     public UnityEvent onInit;
     [SerializeField] private UnityEvent<float, float> DamageTaken;
+    [SerializeField] private UnityEvent<float> OnDeath;
 
     public void Init(EnemyData data)
     {
@@ -32,6 +33,7 @@ public class Enemy : MonoBehaviour
         if (_currentHealth <= 0)
         {
             _currentHealth = 0;
+            OnDeath?.Invoke(_coinAmount);
         }
         DamageTaken?.Invoke(_currentHealth, _maxHealth);
         _renderer.DOColor(Color.white, 0.5f).From(Color.red);

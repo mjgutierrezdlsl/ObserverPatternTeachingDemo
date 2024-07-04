@@ -7,12 +7,19 @@ public class EnemyManager : MonoBehaviour
 
     private int _enemyIndex;
 
-    public void SpawnEnemy()
+    public void SpawnEnemy(bool random = false)
     {
-        // Loops the enemy index
-        if (_enemyIndex > _enemyTypes.Length - 1)
+        if (!random)
         {
-            _enemyIndex = 0;
+            // Loops the enemy index
+            if (_enemyIndex > _enemyTypes.Length - 1)
+            {
+                _enemyIndex = 0;
+            }
+        }
+        else
+        {
+            _enemyIndex = Random.Range(0, _enemyTypes.Length);
         }
 
         var type = _enemyTypes[_enemyIndex];
